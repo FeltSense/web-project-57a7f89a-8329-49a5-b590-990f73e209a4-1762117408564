@@ -1,0 +1,90 @@
+{
+  "componentsToGenerate": [
+    "Navigation",
+    "Hero",
+    "FeaturedDishes",
+    "QuickReservation",
+    "MenuSection",
+    "MenuItemCard",
+    "CategoryFilter",
+    "ShoppingCart",
+    "OrderForm",
+    "ReservationForm",
+    "LocationMap",
+    "Testimonials",
+    "AboutStory",
+    "ContactInfo",
+    "Footer"
+  ],
+  "estimatedChallenges": [
+    {
+      "component": "Navigation",
+      "challenge": "Mobile menu with smooth animations and active state management",
+      "mitigation": "Use useState for menu toggle, CSS transitions for animations, usePathname for active links"
+    },
+    {
+      "component": "MenuSection",
+      "challenge": "Complex filtering logic with multiple criteria (category, dietary, search)",
+      "mitigation": "Implement useMemo for filtered results, separate filter state management, clear filter UI"
+    },
+    {
+      "component": "ShoppingCart",
+      "challenge": "State management across components, item quantity updates, price calculations",
+      "mitigation": "Use React Context or prop drilling with clear state structure, separate cart logic into custom hook"
+    },
+    {
+      "component": "ReservationForm",
+      "challenge": "Date/time validation, availability checking, form state management",
+      "mitigation": "Use controlled inputs, implement validation logic, provide clear error messages, disable unavailable slots"
+    },
+    {
+      "component": "OrderForm",
+      "challenge": "Multi-step checkout flow, address validation, order summary",
+      "mitigation": "Break into smaller sub-components, use step state management, validate each step before proceeding"
+    },
+    {
+      "component": "LocationMap",
+      "challenge": "Embedding external map service, responsive sizing, loading states",
+      "mitigation": "Use iframe with proper aspect ratio, implement loading skeleton, provide fallback static map"
+    },
+    {
+      "component": "MenuItemCard",
+      "challenge": "Image optimization, dietary icons, add-to-cart interaction",
+      "mitigation": "Use Next.js Image component, create reusable icon system, clear button states and feedback"
+    },
+    {
+      "component": "FeaturedDishes",
+      "challenge": "Carousel/slider implementation with touch support",
+      "mitigation": "Use CSS scroll-snap or implement simple prev/next navigation, ensure keyboard accessibility"
+    }
+  ],
+  "fixerContext": {
+    "expectedStructure": "Next.js 14+ App Router structure with:\n- app/page.tsx (home)\n- app/menu/page.tsx\n- app/order/page.tsx\n- app/reservations/page.tsx\n- app/about/page.tsx\n- app/contact/page.tsx\n- components/ folder with all reusable components\n- lib/ folder for utilities and data\n- public/ folder for images",
+    "importPaths": "All component imports should use relative paths from their location. Components in components/ imported as '@/components/ComponentName' or '../components/ComponentName' depending on context",
+    "commonIssues": [
+      "Missing 'use client' directive in interactive components (forms, cart, navigation)",
+      "Image imports without proper Next.js Image component usage",
+      "State management across cart and order components - ensure proper prop passing or context",
+      "Form validation and error handling - include proper error states",
+      "Responsive design breakpoints - ensure mobile-first approach",
+      "Missing key props in mapped lists (menu items, testimonials)",
+      "Hardcoded data should be in separate data files or constants",
+      "Link components must use Next.js Link from 'next/link'",
+      "Button onClick handlers need proper event typing",
+      "Date/time inputs need proper formatting and validation"
+    ],
+    "dataStructure": {
+      "menuItems": "Array of objects with: id, name, description, price, category, image, dietary (array), allergens (array)",
+      "categories": "Array of strings: ['Appetizers', 'Mains', 'Desserts', 'Drinks']",
+      "dietaryOptions": "Array of objects with: id, label, icon",
+      "testimonials": "Array of objects with: id, name, rating, comment, date",
+      "hours": "Object with days as keys and hours as values"
+    },
+    "stateManagement": {
+      "cart": "Context or lifted state containing: items (array), addItem, removeItem, updateQuantity, clearCart, total",
+      "reservation": "Form state with: date, time, partySize, name, email, phone, specialRequests",
+      "order": "Multi-step state with: orderType, items, deliveryAddress, contactInfo, paymentMethod"
+    },
+    "styling": "Use Tailwind CSS with custom color palette defined in tailwind.config. Ensure consistent spacing, typography scale, and component styling. Mobile-first responsive design with breakpoints at sm:640px, md:768px, lg:1024px, xl:1280px"
+  }
+}
